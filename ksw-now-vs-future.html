@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KSW Senior School · Now vs Future</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0e2240; --slate:#2b4a6f; --crimson:#b3232c; --crimson-soft:#f3dadb;
+    --paper:#eef1f6; --card:#ffffff; --line:#dde3ec;
+    --leave:#b3232c; --leave-soft:#f7e3e4;
+    --stay:#2b4a6f; --stay-soft:#e7edf5;
+    --join:#1f7a52; --join-soft:#dcefe5;
+    --change:#b8801f; --change-soft:#f6ecd6;
+    --muted:#71808f; --dim:#aab4c2;
+    --display:'Newsreader',Georgia,serif;
+    --body:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--body);background:var(--paper);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+
+  header{background:linear-gradient(180deg,#0e2240,#13294b);color:#fff;padding:50px 0 44px;border-bottom:3px solid var(--crimson)}
+  .eyebrow{font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#9fb4d1;margin-bottom:18px}
+  h1{font-family:var(--display);font-weight:500;font-size:clamp(30px,5vw,46px);line-height:1.08;letter-spacing:-.01em;max-width:20ch}
+  h1 .accent{color:#ff8a8f}
+  .sub{margin-top:16px;max-width:66ch;color:#cdd8e8;font-size:16px}
+  .verdict-strip{margin-top:28px;display:inline-flex;align-items:center;gap:14px;background:rgba(255,138,143,.1);border:1px solid rgba(255,138,143,.32);border-radius:10px;padding:12px 20px}
+  .verdict-strip .k{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#ffb3b6}
+  .verdict-strip .v{font-family:var(--display);font-size:18px;color:#fff}
+
+  .xnav{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:24px;flex-wrap:wrap}
+  .xnav .here{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#9fb4d1}
+  .xnav a.xlink{font-size:13px;font-weight:600;color:#fff;text-decoration:none;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.22);padding:8px 15px;border-radius:8px;transition:background .2s}
+  .xnav a.xlink:hover{background:rgba(255,255,255,.16)}
+  .xnav a.xlink:focus-visible{outline:2px solid #ff8a8f;outline-offset:2px}
+  section{padding:50px 0}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:8px}
+  .sec-num{font-family:var(--display);font-size:15px;color:var(--crimson);font-weight:600;border:1px solid var(--crimson);border-radius:50%;width:30px;height:30px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  h2{font-family:var(--display);font-weight:500;font-size:27px;letter-spacing:-.01em}
+  .sec-note{color:var(--muted);font-size:15px;margin:6px 0 26px 44px;max-width:66ch}
+
+  /* Now vs Future stacks */
+  .stacks{display:grid;grid-template-columns:1fr 1fr;gap:22px;position:relative}
+  .col{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .col.future{border:1px solid #c9d4e4;box-shadow:0 8px 30px -18px rgba(14,34,64,.4)}
+  .col-head{padding:18px 22px;display:flex;align-items:center;justify-content:space-between}
+  .col.now .col-head{background:#f3f5f8;border-bottom:1px solid var(--line)}
+  .col.future .col-head{background:var(--ink);border-bottom:3px solid var(--crimson)}
+  .col-head .t{font-family:var(--display);font-size:21px;font-weight:500}
+  .col.future .col-head .t{color:#fff}
+  .col-head .yr{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+  .col.now .col-head .yr{color:var(--muted)}
+  .col.future .col-head .yr{color:#9fb4d1}
+  .chips{padding:18px 22px 22px}
+  .chip{display:flex;align-items:center;gap:14px;padding:13px 0;border-bottom:1px solid #eef1f6}
+  .chip:last-child{border-bottom:none}
+  .chip .badge{flex-shrink:0;font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:4px 9px;border-radius:6px;min-width:62px;text-align:center}
+  .badge.leave{background:var(--leave-soft);color:var(--leave)}
+  .badge.stay{background:var(--stay-soft);color:var(--stay)}
+  .badge.join{background:var(--join-soft);color:var(--join)}
+  .badge.change{background:var(--change-soft);color:var(--change)}
+  .chip .body .nm{font-weight:600;font-size:15px}
+  .chip .body .nm.struck{text-decoration:line-through;color:var(--dim)}
+  .chip .body .rl{font-size:13px;color:var(--muted);margin-top:1px}
+  .change-legend{display:flex;flex-wrap:wrap;gap:18px;margin-top:18px;font-size:13px;color:var(--muted)}
+  .change-legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  .dot.leave{background:var(--leave)}.dot.join{background:var(--join)}.dot.stay{background:var(--stay)}.dot.change{background:var(--change)}
+
+  /* Cost */
+  .cost-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px}
+  .cbox{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px}
+  .cbox.leaves{border-top:3px solid var(--leave)}
+  .cbox.joins{border-top:3px solid var(--join)}
+  .cbox.stays{border-top:3px solid var(--stay)}
+  .cbox h3{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:16px}
+  .cbox.leaves h3{color:var(--leave)}.cbox.joins h3{color:var(--join)}.cbox.stays h3{color:var(--stay)}
+  .cline{display:flex;justify-content:space-between;align-items:baseline;padding:9px 0;font-size:15px;border-bottom:1px solid #eef1f6}
+  .cline:last-child{border-bottom:none}
+  .cline .amt{font-variant-numeric:tabular-nums;font-weight:600}
+  .cline .amt.q{color:var(--change);font-weight:600}
+  .csub{display:flex;justify-content:space-between;align-items:baseline;margin-top:14px;padding-top:13px;border-top:2px solid var(--line);font-weight:700}
+  .csub .amt{font-variant-numeric:tabular-nums;font-size:18px}
+  .cbox.stays .note{font-size:13px;color:var(--muted);line-height:1.6}
+
+  .net{margin-top:22px;background:var(--ink);color:#fff;border-radius:14px;padding:26px 30px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px}
+  .net .label{font-family:var(--display);font-size:21px;font-weight:500}
+  .net .figure{display:flex;align-items:baseline;gap:14px}
+  .net .figure .delta{font-family:var(--display);font-size:34px;font-weight:600;font-variant-numeric:tabular-nums;color:#ff8a8f}
+  .net .figure .tag{font-size:13px;color:#cdd8e8;max-width:30ch}
+
+  .sliders{margin-top:22px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px 24px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .field label{display:flex;justify-content:space-between;align-items:baseline;font-size:13.5px;font-weight:500;margin-bottom:8px}
+  .field label .v{font-variant-numeric:tabular-nums;font-weight:700;color:var(--crimson)}
+  input[type=range]{width:100%;accent-color:var(--crimson);height:6px}
+
+  /* Parents */
+  .ba{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-bottom:26px}
+  .ba-card{border-radius:12px;padding:22px 24px}
+  .ba-card.before{background:#f3f5f8;border:1px solid var(--line)}
+  .ba-card.after{background:linear-gradient(180deg,#fff,#f6faf7);border:1px solid #c9e0d2}
+  .ba-card .h{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px}
+  .ba-card.before .h{color:var(--muted)}
+  .ba-card.after .h{color:var(--join)}
+  .ba-card ul{list-style:none}
+  .ba-card li{padding:9px 0 9px 26px;position:relative;font-size:14.5px;line-height:1.5;border-bottom:1px solid rgba(0,0,0,.05)}
+  .ba-card li:last-child{border-bottom:none}
+  .ba-card.before li::before{content:"\2715";position:absolute;left:0;top:9px;color:var(--leave);font-weight:700;font-size:13px}
+  .ba-card.after li::before{content:"\2713";position:absolute;left:0;top:9px;color:var(--join);font-weight:700;font-size:14px}
+
+  .pcards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .pc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px;border-top:3px solid var(--crimson)}
+  .pc h4{font-family:var(--display);font-size:18px;font-weight:500;margin-bottom:9px;line-height:1.25}
+  .pc p{font-size:14px;color:var(--slate);line-height:1.6}
+
+  .flag{background:var(--change-soft);border:1px solid #e6cf9a;border-radius:12px;padding:22px 26px;margin-top:8px}
+  .flag h4{font-family:var(--display);font-size:18px;font-weight:500;color:#8a5e12;margin-bottom:8px}
+  .flag p{font-size:14.5px;color:#6b4d12;line-height:1.6}
+
+  footer{padding:36px 0 56px;color:var(--muted);font-size:13px;line-height:1.7}
+  footer .wrap{border-top:1px solid var(--line);padding-top:24px}
+  footer b{color:var(--slate)}
+
+  @media(max-width:880px){
+    .stacks{grid-template-columns:1fr}
+    .cost-grid{grid-template-columns:1fr}
+    .sliders{grid-template-columns:1fr}
+    .ba{grid-template-columns:1fr}
+    .pcards{grid-template-columns:1fr}
+  }
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="xnav"><span class="here">Page 1 · Stack overview</span><a class="xlink" href="ksw-microsoft-to-google.html">Page 2 · Microsoft to Google &rarr;</a></div>
+    <div class="eyebrow">King's Worcester · Senior School · Stack Transition</div>
+    <h1>Fewer tools. One <span class="accent">front door</span> for parents.</h1>
+    <p class="sub">The move retires Firefly, shifts pupils from Teams to Google Classroom, and brings in MySchoolPortal as a single parent dashboard. SOCS and iSAMS stay. The spend barely moves, so the case is the parent experience, not the price.</p>
+    <div class="verdict-strip">
+      <span class="k">Headline</span>
+      <span class="v" id="hVerdict">Broadly cost neutral, materially better for parents</span>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">1</span><h2>The stack, now and next</h2></div>
+    <p class="sec-note">Two tools leave or change, one joins, two stay. The pupils' productivity layer moves from Microsoft to Google, and a parent dashboard sits over the top.</p>
+    <div class="stacks">
+      <div class="col now">
+        <div class="col-head"><span class="t">Now</span><span class="yr">Current</span></div>
+        <div class="chips">
+          <div class="chip"><span class="badge leave">Leaving</span><div class="body"><div class="nm struck">Firefly</div><div class="rl">VLE, homework, parent portal, rewards</div></div></div>
+          <div class="chip"><span class="badge change">Changing</span><div class="body"><div class="nm">Microsoft Teams</div><div class="rl">Pupil and staff productivity, email, files</div></div></div>
+          <div class="chip"><span class="badge stay">Staying</span><div class="body"><div class="nm">SOCS</div><div class="rl">Calendar, sport fixtures, co-curricular</div></div></div>
+          <div class="chip"><span class="badge stay">Staying</span><div class="body"><div class="nm">iSAMS</div><div class="rl">MIS, reports, attendance, parent and student portals</div></div></div>
+        </div>
+      </div>
+      <div class="col future">
+        <div class="col-head"><span class="t">Future</span><span class="yr">Proposed</span></div>
+        <div class="chips">
+          <div class="chip"><span class="badge join">New</span><div class="body"><div class="nm">MySchoolPortal</div><div class="rl">Single parent dashboard over iSAMS and SOCS</div></div></div>
+          <div class="chip"><span class="badge change">New platform</span><div class="body"><div class="nm">Google Classroom · Education Plus</div><div class="rl">Teaching and homework, plus AI and security layer</div></div></div>
+          <div class="chip"><span class="badge stay">Staying</span><div class="body"><div class="nm">SOCS</div><div class="rl">Calendar, sport fixtures, co-curricular</div></div></div>
+          <div class="chip"><span class="badge stay">Staying</span><div class="body"><div class="nm">iSAMS</div><div class="rl">MIS, reports, attendance, feeds the parent dashboard</div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="change-legend">
+      <span><span class="dot leave"></span> Leaves the stack</span>
+      <span><span class="dot change"></span> Changes platform</span>
+      <span><span class="dot join"></span> Joins the stack</span>
+      <span><span class="dot stay"></span> Stays</span>
+    </div>
+  </div>
+</section>
+
+<section style="background:#e7ecf3">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">2</span><h2>What it costs, in broad terms</h2></div>
+    <p class="sec-note">Firm rows are Firefly and Education Plus. SOCS and MySchoolPortal are quote-based, shown here as placeholders. The pattern that matters: what you stop paying for Firefly roughly funds what you start paying for the parent dashboard and Google.</p>
+    <div class="cost-grid">
+      <div class="cbox leaves">
+        <h3>Leaves</h3>
+        <div class="cline"><span>Firefly</span><span class="amt" id="cFirefly">£9,300</span></div>
+        <div class="cline"><span>Microsoft paid tier, if any</span><span class="amt q">varies</span></div>
+        <div class="csub"><span>Stops</span><span class="amt" id="cLeaveTotal">£9,300</span></div>
+      </div>
+      <div class="cbox joins">
+        <h3>Joins</h3>
+        <div class="cline"><span>MySchoolPortal</span><span class="amt q" id="cMsp">£4,500</span></div>
+        <div class="cline"><span>Education Plus</span><span class="amt" id="cEdu">£4,688</span></div>
+        <div class="cline"><span>Google Classroom</span><span class="amt" style="color:var(--join)">free</span></div>
+        <div class="csub"><span>Starts</span><span class="amt" id="cJoinTotal">£9,188</span></div>
+      </div>
+      <div class="cbox stays">
+        <h3>Stays the same</h3>
+        <div class="cline"><span>SOCS</span><span class="amt q">~£6,000</span></div>
+        <div class="cline"><span>iSAMS</span><span class="amt">existing</span></div>
+        <p class="note" style="margin-top:14px">Both sit on both sides of the move, so they wash out of the comparison.</p>
+      </div>
+    </div>
+
+    <div class="net">
+      <span class="label">Net change to the budget</span>
+      <span class="figure"><span class="delta" id="netDelta">−£112</span><span class="tag" id="netTag">Broadly cost neutral. The money moves from a VLE few people loved to a better parent experience.</span></span>
+    </div>
+
+    <div class="sliders">
+      <div class="field"><label>Senior roll <span class="v" id="rollV">930</span></label><input type="range" id="roll" min="800" max="1000" step="10" value="930"></div>
+      <div class="field"><label>Firefly, per pupil <span class="v" id="ffV">£10</span></label><input type="range" id="ff" min="7" max="15" step="0.5" value="10"></div>
+      <div class="field"><label>Education Plus, per user <span class="v" id="gV">£4.00</span></label><input type="range" id="g" min="3.2" max="4.7" step="0.05" value="4.00"></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">3</span><h2>What changes for parents</h2></div>
+    <p class="sec-note">This is the real return on the move. Today parents juggle several systems and a portal they do not rate. The future gives them one branded front door to everything about their child.</p>
+
+    <div class="ba">
+      <div class="ba-card before">
+        <div class="h">How it feels now</div>
+        <ul>
+          <li>Separate logins for Firefly, the iSAMS portal and SOCS</li>
+          <li>An iSAMS parent portal that parents do not enjoy using</li>
+          <li>No single view of a child's day, scattered across systems</li>
+          <li>Pupils' work lives in Teams, with little visibility for parents</li>
+        </ul>
+      </div>
+      <div class="ba-card after">
+        <div class="h">How it feels next</div>
+        <ul>
+          <li>One username and password for everything</li>
+          <li>Reports, attendance, timetable and exams on a single dashboard</li>
+          <li>Sport fixtures and club sign-ups in the same place</li>
+          <li>Homework visible through Google Classroom guardian summaries</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="pcards">
+      <div class="pc"><h4>One login, not three</h4><p>MySchoolPortal aggregates iSAMS and SOCS behind a single branded login, so parents stop hunting across systems for the thing they need.</p></div>
+      <div class="pc"><h4>Their child's day in one view</h4><p>Reports, attendance, timetables, exam entries and results sit on one dashboard that works the same on a phone, tablet or desktop.</p></div>
+      <div class="pc"><h4>What RGS parents already have</h4><p>Your nearest competitor runs exactly this pattern, MySchoolPortal over iSAMS and SOCS. The move closes a gap rather than taking a risk.</p></div>
+    </div>
+  </div>
+</section>
+
+<section style="background:#e7ecf3">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">4</span><h2>The honest part</h2></div>
+    <p class="sec-note">One line in the table carries nearly all the effort, and it is not Firefly.</p>
+    <div class="flag">
+      <h4>Teams to Google is the real work, not the real cost</h4>
+      <p>Moving pupils and staff off Microsoft and onto Google is broadly licence-neutral, but it means migrating files and email, retraining staff and changing daily habits across the school. Budget the time and the change management, not just the subscription. Firefly retiring is the easy part. The platform shift is the part that needs a proper plan and a year to land well.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <b>Assumptions and sources.</b> Senior roll ~930 (Wikipedia, Mar 2026; school recruitment material gives ~850). Firefly £7–£12 per pupil per year (TechCrunch, 2016, likely higher now). Education Plus list price ~$6 per user per year, ~£3.20–£4.70 with UK reseller and 50–999 licence discount, charged on all active users (pupils plus ~242 senior staff). Google Classroom is free in Education Fundamentals. SOCS and MySchoolPortal are quote-based with no public per-pupil rate; figures are illustrative placeholders. iSAMS is owned by IRIS Software Group and rebuilt its Parent and Student Cloud Portals in 2025. Education Plus is a full-domain edition, so a senior-school-only purchase may not be possible if the Foundation runs one domain. Microsoft Education A1, which includes Teams, is free, so any Microsoft saving depends on whether KSW pays for A3 or A5. Broad planning figures for internal discussion, not a quote.
+  </div>
+</footer>
+
+<script>
+  var GBP=function(n){return '£'+Math.round(n).toLocaleString('en-GB');};
+  var roll=document.getElementById('roll'),ff=document.getElementById('ff'),g=document.getElementById('g');
+  var STAFF=242, MSP=4500;
+  function recalc(){
+    var R=+roll.value,F=+ff.value,G=+g.value;
+    document.getElementById('rollV').textContent=R.toLocaleString('en-GB');
+    document.getElementById('ffV').textContent='£'+(F%1?F.toFixed(1):F);
+    document.getElementById('gV').textContent='£'+G.toFixed(2);
+
+    var firefly=R*F;
+    var edu=(R+STAFF)*G;
+    var leave=firefly;
+    var join=MSP+edu;
+    var net=join-leave;
+
+    document.getElementById('cFirefly').textContent=GBP(firefly);
+    document.getElementById('cLeaveTotal').textContent=GBP(leave);
+    document.getElementById('cMsp').textContent=GBP(MSP);
+    document.getElementById('cEdu').textContent=GBP(edu);
+    document.getElementById('cJoinTotal').textContent=GBP(join);
+
+    var sign=net>0?'+':'−';
+    document.getElementById('netDelta').textContent=sign+GBP(Math.abs(net)).replace('£','£');
+    var tag,verdict;
+    if(Math.abs(net)<2000){tag='Broadly cost neutral. The money moves from a VLE few people loved to a better parent experience.';verdict='Broadly cost neutral, materially better for parents';}
+    else if(net>0){tag='A modest increase, in exchange for one parent front door and a unified Google ecosystem.';verdict='A modest increase, materially better for parents';}
+    else{tag='A net saving on top of a better parent experience.';verdict='A net saving and a better parent experience';}
+    document.getElementById('netTag').textContent=tag;
+    document.getElementById('hVerdict').textContent=verdict;
+  }
+  [roll,ff,g].forEach(function(el){el.addEventListener('input',recalc);});
+  recalc();
+</script>
+</body>
+</html>

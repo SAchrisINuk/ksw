@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KSW Senior School · Microsoft to Google</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0e2240;--slate:#2b4a6f;--crimson:#b3232c;--crimson-soft:#f3dadb;
+    --paper:#eef1f6;--card:#ffffff;--line:#dde3ec;
+    --join:#1f7a52;--join-soft:#dcefe5;--stay:#2b4a6f;--stay-soft:#e7edf5;
+    --change:#b8801f;--change-soft:#f6ecd6;--muted:#71808f;--dim:#aab4c2;
+    --display:'Newsreader',Georgia,serif;--body:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--body);background:var(--paper);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+
+  header{background:linear-gradient(180deg,#0e2240,#13294b);color:#fff;padding:46px 0 44px;border-bottom:3px solid var(--crimson)}
+  .pageof{font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#9fb4d1;margin-bottom:18px;display:flex;gap:8px;align-items:center}
+  .pageof .pill{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);padding:3px 10px;border-radius:20px;color:#cdd8e8}
+  h1{font-family:var(--display);font-weight:500;font-size:clamp(30px,5vw,46px);line-height:1.08;letter-spacing:-.01em;max-width:20ch}
+  h1 .accent{color:#ff8a8f}
+  .sub{margin-top:16px;max-width:66ch;color:#cdd8e8;font-size:16px}
+
+  .xnav{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:24px;flex-wrap:wrap}
+  .xnav .here{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#9fb4d1}
+  .xnav a.xlink{font-size:13px;font-weight:600;color:#fff;text-decoration:none;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.22);padding:8px 15px;border-radius:8px;transition:background .2s}
+  .xnav a.xlink:hover{background:rgba(255,255,255,.16)}
+  .xnav a.xlink:focus-visible{outline:2px solid #ff8a8f;outline-offset:2px}
+  section{padding:50px 0}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:8px}
+  .sec-num{font-family:var(--display);font-size:15px;color:var(--crimson);font-weight:600;border:1px solid var(--crimson);border-radius:50%;width:30px;height:30px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  h2{font-family:var(--display);font-weight:500;font-size:27px;letter-spacing:-.01em}
+  .sec-note{color:var(--muted);font-size:15px;margin:6px 0 26px 44px;max-width:66ch}
+
+  /* Mapping */
+  .map{display:grid;grid-template-columns:1fr;gap:0;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .map-row{display:grid;grid-template-columns:1fr 52px 1fr;align-items:center;padding:15px 22px;border-bottom:1px solid #eef1f6}
+  .map-row:last-child{border-bottom:none}
+  .map-row .ms{text-align:right}
+  .map-row .from{font-weight:500;font-size:15px;color:var(--slate)}
+  .map-row .fl{font-size:12px;color:var(--muted)}
+  .map-row .arr{text-align:center;color:var(--crimson);font-size:18px}
+  .map-row .to{font-weight:600;font-size:15px}
+  .map-row .tl{font-size:12px;color:var(--muted)}
+  .map-head{display:grid;grid-template-columns:1fr 52px 1fr;padding:13px 22px;background:#f7f9fc;border-bottom:1px solid var(--line);font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+  .map-head .l{text-align:right;color:var(--muted)}
+  .map-head .r{color:var(--ink)}
+
+  /* Benefit columns */
+  .bcols{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+  .bcol{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .bcol .bh{padding:16px 22px;background:var(--ink);color:#fff;border-bottom:3px solid var(--crimson);font-family:var(--display);font-size:19px}
+  .bcol ul{list-style:none;padding:8px 22px 18px}
+  .bcol li{padding:12px 0 12px 28px;position:relative;border-bottom:1px solid #eef1f6;font-size:14.5px;line-height:1.5}
+  .bcol li:last-child{border-bottom:none}
+  .bcol li::before{content:"\2713";position:absolute;left:0;top:12px;color:var(--join);font-weight:700}
+  .bcol li b{font-weight:600}
+
+  /* Salamander pipeline */
+  .pipe{display:grid;grid-template-columns:1fr 46px 1.3fr 46px 1fr;align-items:stretch;gap:0;margin-bottom:22px}
+  .node{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px;text-align:center;display:flex;flex-direction:column;justify-content:center}
+  .node.src{border-top:3px solid var(--stay)}
+  .node.eng{border-top:3px solid var(--crimson);background:linear-gradient(180deg,#fff,#fbf4f4)}
+  .node.dst{border-top:3px solid var(--join)}
+  .node .nlabel{font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+  .node .nname{font-family:var(--display);font-size:19px;font-weight:500}
+  .node .ndesc{font-size:12.5px;color:var(--muted);margin-top:4px;line-height:1.4}
+  .flow{display:flex;align-items:center;justify-content:center;color:var(--crimson);font-size:22px;font-weight:700}
+  .carries{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px 24px}
+  .carries h4{font-size:12px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--slate);margin-bottom:14px}
+  .carries .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px 28px}
+  .carries .item{padding-left:26px;position:relative;font-size:14px;line-height:1.45}
+  .carries .item::before{content:"\21BB";position:absolute;left:0;top:0;color:var(--crimson);font-weight:700}
+  .carries .item b{font-weight:600}
+
+  /* Timeline */
+  .tl-spine{position:relative;margin-left:8px;padding-left:34px}
+  .tl-spine::before{content:"";position:absolute;left:13px;top:8px;bottom:8px;width:2px;background:linear-gradient(180deg,var(--crimson),var(--stay))}
+  .phase{position:relative;margin-bottom:20px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px 24px}
+  .phase::before{content:counter(p);counter-increment:p;position:absolute;left:-34px;top:20px;width:28px;height:28px;background:var(--crimson);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;box-shadow:0 0 0 4px var(--paper)}
+  .tl-spine{counter-reset:p}
+  .phase .ph-top{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:8px}
+  .phase .ph-name{font-family:var(--display);font-size:20px;font-weight:500}
+  .phase .ph-when{font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--crimson);background:var(--crimson-soft);padding:4px 11px;border-radius:6px}
+  .phase .ph-body{font-size:14.5px;color:var(--slate);line-height:1.6}
+  .phase .done{margin-top:11px;font-size:13.5px;color:var(--join);padding-left:24px;position:relative}
+  .phase .done::before{content:"\2713 Done when";position:absolute;left:0;top:0;display:none}
+  .phase .done .lbl{font-weight:700}
+
+  .flag{background:var(--change-soft);border:1px solid #e6cf9a;border-radius:12px;padding:22px 26px}
+  .flag h4{font-family:var(--display);font-size:18px;font-weight:500;color:#8a5e12;margin-bottom:8px}
+  .flag p{font-size:14.5px;color:#6b4d12;line-height:1.6}
+
+  footer{padding:36px 0 56px;color:var(--muted);font-size:13px;line-height:1.7}
+  footer .wrap{border-top:1px solid var(--line);padding-top:24px}
+  footer b{color:var(--slate)}
+
+  @media(max-width:880px){
+    .bcols{grid-template-columns:1fr}
+    .pipe{grid-template-columns:1fr;gap:10px}
+    .flow{transform:rotate(90deg);height:30px}
+    .carries .grid{grid-template-columns:1fr}
+    .map-row,.map-head{grid-template-columns:1fr 36px 1fr}
+  }
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="xnav"><a class="xlink" href="ksw-now-vs-future.html">&larr; Page 1 · Stack overview</a><span class="here">Page 2 · Microsoft to Google</span></div>
+    <div class="pageof"><span class="pill">Page 2 of 2</span> Students, staff and rollout</div>
+    <h1>The classroom, rebuilt around how people <span class="accent">already work</span>.</h1>
+    <p class="sub">Moving from Teams, Outlook, OneDrive and SharePoint to Google Classroom, Gmail and Drive gives pupils and staff one connected place to teach, learn and collaborate. A live link from iSAMS, run by Salamander Soft, keeps it all provisioned automatically so the change is sustainable rather than a one-off scramble.</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">1</span><h2>Nothing is lost, everything has a home</h2></div>
+    <p class="sec-note">Every Microsoft tool maps to a Google equivalent. Staff who know one will recognise the other within a lesson or two.</p>
+    <div class="map">
+      <div class="map-head"><span class="l">Microsoft, now</span><span></span><span class="r">Google, next</span></div>
+      <div class="map-row"><div class="ms"><div class="from">Microsoft Teams</div><div class="fl">Classes, chat, meetings</div></div><div class="arr">→</div><div><div class="to">Google Classroom + Meet + Chat</div><div class="tl">Assignments, feedback, calls</div></div></div>
+      <div class="map-row"><div class="ms"><div class="from">Outlook / Exchange</div><div class="fl">Email and calendar</div></div><div class="arr">→</div><div><div class="to">Gmail + Google Calendar</div><div class="tl">Email and timetable in one place</div></div></div>
+      <div class="map-row"><div class="ms"><div class="from">OneDrive</div><div class="fl">Personal files</div></div><div class="arr">→</div><div><div class="to">Google Drive (My Drive)</div><div class="tl">Personal files, online and offline</div></div></div>
+      <div class="map-row"><div class="ms"><div class="from">SharePoint</div><div class="fl">Shared sites and stores</div></div><div class="arr">→</div><div><div class="to">Shared Drives + Google Sites</div><div class="tl">Department areas owned by the team</div></div></div>
+      <div class="map-row"><div class="ms"><div class="from">Word, Excel, PowerPoint</div><div class="fl">Documents</div></div><div class="arr">→</div><div><div class="to">Docs, Sheets, Slides</div><div class="tl">Live co-editing with version history</div></div></div>
+      <div class="map-row"><div class="ms"><div class="from">Forms · OneNote</div><div class="fl">Quizzes and notebooks</div></div><div class="arr">→</div><div><div class="to">Google Forms · Classroom</div><div class="tl">Quizzes, plus class materials in Classroom</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section style="background:#e7ecf3">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">2</span><h2>What students and staff gain</h2></div>
+    <p class="sec-note">The win is not a different brand of software. It is fewer logins, real collaboration, and class admin that builds itself from the timetable.</p>
+    <div class="bcols">
+      <div class="bcol">
+        <div class="bh">For students</div>
+        <ul>
+          <li><b>Real collaboration.</b> Several pupils edit one Doc or Slides deck together, with full version history and no emailed attachments.</li>
+          <li><b>One place for work.</b> Classroom holds assignments, due dates, feedback and grades, so nothing gets lost between apps.</li>
+          <li><b>Any device.</b> It runs the same on a phone, a laptop or a low-cost Chromebook, which lowers the cost barrier for families.</li>
+          <li><b>Built-in support.</b> Read-aloud, captions and translation help pupils with additional needs and EAL learners.</li>
+          <li><b>One identity.</b> A single sign-on into every class and resource, provisioned automatically from iSAMS.</li>
+        </ul>
+      </div>
+      <div class="bcol">
+        <div class="bh">For staff</div>
+        <ul>
+          <li><b>Classes build themselves.</b> Rosters, classrooms and timetables are created from iSAMS each term, with no manual setup.</li>
+          <li><b>Faster feedback.</b> Rubrics, comment banks and inline marking in Classroom cut the time around assessment.</li>
+          <li><b>Plan together.</b> Shared Drives let departments co-own schemes of work instead of passing files around.</li>
+          <li><b>AI where it helps.</b> Gemini in Education Plus drafts resources, differentiates tasks and speeds up routine writing.</li>
+          <li><b>Day-one ready, secure by default.</b> Accounts exist on the first morning of term and close automatically when someone leaves.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">3</span><h2>The engine that makes it sustainable</h2></div>
+    <p class="sec-note">iSAMS stays the single source of truth. Salamander Soft's integrator reads it and provisions Google automatically, so the school is never managing accounts by hand.</p>
+    <div class="pipe">
+      <div class="node src"><div class="nlabel">Source of truth</div><div class="nname">iSAMS</div><div class="ndesc">Pupils, staff, classes, timetables</div></div>
+      <div class="flow">→</div>
+      <div class="node eng"><div class="nlabel">Live sync</div><div class="nname">Salamander Soft Integrator</div><div class="ndesc">Reads iSAMS, provisions Google, writes IDs back</div></div>
+      <div class="flow">→</div>
+      <div class="node dst"><div class="nlabel">Destination</div><div class="nname">Google Workspace</div><div class="ndesc">Accounts, Classrooms, Calendar</div></div>
+    </div>
+    <div class="carries">
+      <h4>What the link keeps in sync, automatically</h4>
+      <div class="grid">
+        <div class="item"><b>Accounts</b> created and updated to your naming convention</div>
+        <div class="item"><b>Google Classrooms</b> and rosters built from the timetable</div>
+        <div class="item"><b>Timetables</b> pushed into each user's Google Calendar</div>
+        <div class="item"><b>Photos</b> synced across the Workspace</div>
+        <div class="item"><b>Guardian summaries</b> switched on so parents stay informed</div>
+        <div class="item"><b>Leavers</b> offboarded, accounts and access removed</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background:#e7ecf3">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">4</span><h2>What the rollout looks like</h2></div>
+    <p class="sec-note">Staff move a term ahead of pupils, a pilot proves it before the whole school commits, and Microsoft is retired only once Google is carrying the load. The plan runs across an academic year and can compress, but the order should hold.</p>
+    <div class="tl-spine">
+      <div class="phase">
+        <div class="ph-top"><span class="ph-name">Discovery and design</span><span class="ph-when">Autumn 2026</span></div>
+        <div class="ph-body">Confirm Education Plus licences and the domain, stand up the Google tenancy, connect Salamander to iSAMS, agree naming conventions, and pick a pilot group of willing staff.</div>
+        <div class="done"><span class="lbl">Done when:</span> the tenancy is live, the iSAMS sync is tested, and the pilot group is provisioned.</div>
+      </div>
+      <div class="phase">
+        <div class="ph-top"><span class="ph-name">Staff first</span><span class="ph-when">Spring 2027</span></div>
+        <div class="ph-body">All staff move to Gmail, Drive and Classroom with a proper training programme, running alongside Teams so nothing breaks. Name a champion in each department.</div>
+        <div class="done"><span class="lbl">Done when:</span> staff are confident, key materials are migrated, and every department has a champion.</div>
+      </div>
+      <div class="phase">
+        <div class="ph-top"><span class="ph-name">Pupil pilot</span><span class="ph-when">Summer 2027</span></div>
+        <div class="ph-body">Selected departments or year groups teach through Classroom, guardian summaries go live for those families, and OneDrive and SharePoint content is migrated across.</div>
+        <div class="done"><span class="lbl">Done when:</span> the pilot is evaluated, issues are fixed, and parent feedback is positive.</div>
+      </div>
+      <div class="phase">
+        <div class="ph-top"><span class="ph-name">Whole school go-live</span><span class="ph-when">September 2027</span></div>
+        <div class="ph-body">The senior school teaches on Classroom from day one, with every class auto-provisioned from iSAMS. Firefly is retired and Teams moves into a read-only wind-down.</div>
+        <div class="done"><span class="lbl">Done when:</span> all classes are active in Classroom and Firefly is switched off.</div>
+      </div>
+      <div class="phase">
+        <div class="ph-top"><span class="ph-name">Decommission and embed</span><span class="ph-when">Autumn 2027 on</span></div>
+        <div class="ph-body">Close SharePoint and OneDrive, end any Microsoft paid licensing, and review adoption with staff and parents to refine the setup.</div>
+        <div class="done"><span class="lbl">Done when:</span> the Microsoft estate is retired and its cost is out of the budget.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="flag">
+      <h4>Two things that decide whether this lands well</h4>
+      <p>First, sequence staff ahead of pupils without exception. A teacher learning Classroom in the same week they teach through it is the fastest route to a bad first impression. Second, treat data migration as a real workstream, not an afterthought. Years of files in OneDrive and SharePoint need owners, deadlines and a clear cut-off, or content quietly gets stranded on a platform you are trying to switch off.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <b>Notes.</b> Salamander Soft's Integration Suite connects to iSAMS and automatically provisions Google accounts, Classrooms and class rosters, pushes timetables into Google Calendar, syncs photos, supports Google Guardian summaries for parents, and offboards leavers, with usernames written back into the MIS. It is used by several thousand schools. Google Classroom is free in Education Fundamentals; Gemini and the advanced tools sit in Education Plus. The timeline assumes a September 2027 pupil go-live with staff onboarded across the prior year; it can be compressed, but the staff-before-pupils and Google-before-retiring-Microsoft order should not change. This page pairs with the Now vs Future stack overview. Planning detail for internal discussion, not a procurement decision.
+  </div>
+</footer>
+
+</body>
+</html>
