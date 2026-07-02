@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KSW Foundation Digital Strategy — Draft for Consultation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0E1B2E; --navy-2:#16263D; --navy-3:#1F3350;
+  --red:#C8102E; --paper:#FAF8F4; --card:#FFFFFF;
+  --ink:#1A2433; --muted:#5C6B7E; --line:#E4E0D6;
+  --gold:#B8933E; --green:#2E6E4E;
+  --serif:'Newsreader', Georgia, serif;
+  --sans:'Inter', -apple-system, sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;scroll-padding-top:76px;}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto;}*,*::before,*::after{animation:none!important;transition:none!important;}}
+body{font-family:var(--sans);background:var(--paper);color:var(--ink);font-size:16px;line-height:1.6;}
+a{color:var(--red);text-decoration:none;}
+a:hover{text-decoration:underline;}
+a:focus-visible,button:focus-visible{outline:3px solid var(--red);outline-offset:2px;}
+
+/* Hero */
+.hero{background:var(--navy);color:#EDEAE2;padding:0 24px 64px;position:relative;overflow:hidden;}
+.hero::before{content:"";position:absolute;right:-60px;top:40px;width:400px;height:400px;border:1px solid rgba(200,16,46,.3);border-radius:50%;}
+.hero::after{content:"";position:absolute;right:-140px;top:-140px;width:400px;height:400px;border:1px solid rgba(237,234,226,.1);border-radius:50%;}
+.hero-inner{max-width:980px;margin:0 auto;position:relative;z-index:1;}
+.topline{padding:22px 0;border-bottom:1px solid rgba(237,234,226,.15);font-size:13px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;}
+.status-ribbon{display:inline-flex;align-items:center;gap:10px;margin-top:44px;background:rgba(200,16,46,.14);border:1px solid rgba(200,16,46,.5);color:#F0B8C2;padding:7px 16px;border-radius:100px;font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;}
+.status-ribbon .dot{width:8px;height:8px;border-radius:50%;background:var(--red);}
+.hero h1{font-family:var(--serif);font-weight:500;font-size:clamp(38px,6vw,62px);line-height:1.06;margin-top:24px;}
+.hero h1 em{font-style:italic;color:#D9A9B2;}
+.hero .strap{font-family:var(--serif);font-style:italic;font-size:clamp(18px,2.5vw,23px);color:rgba(237,234,226,.75);margin-top:20px;max-width:600px;}
+.hero .meta-row{display:flex;flex-wrap:wrap;gap:28px;margin-top:40px;font-size:13px;color:rgba(237,234,226,.6);}
+.hero .meta-row div span{display:block;color:#EDEAE2;font-weight:600;font-size:14px;margin-top:2px;}
+
+/* Sticky bar */
+.bar{background:var(--navy-2);border-top:1px solid rgba(237,234,226,.1);padding:14px 24px;position:sticky;top:0;z-index:50;}
+.bar-inner{max-width:980px;margin:0 auto;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.bar-label{color:rgba(237,234,226,.55);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;}
+.lens-btn{background:transparent;border:1px solid rgba(237,234,226,.25);color:#EDEAE2;font-family:var(--sans);font-size:13px;font-weight:500;padding:6px 15px;border-radius:100px;cursor:pointer;transition:all .15s ease;}
+.lens-btn:hover{border-color:rgba(237,234,226,.6);}
+.lens-btn.active{background:var(--red);border-color:var(--red);font-weight:600;}
+.bar-nav{margin-left:auto;display:flex;gap:18px;font-size:13.5px;}
+.bar-nav a{color:rgba(237,234,226,.7);font-weight:500;}
+.bar-nav a:hover{color:#fff;text-decoration:none;}
+@media(max-width:820px){.bar-nav{display:none;}}
+
+/* Sections */
+main{max-width:980px;margin:0 auto;padding:0 24px;}
+section{padding:72px 0 6px;}
+.eyebrow{font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--red);font-weight:700;margin-bottom:12px;}
+h2{font-family:var(--serif);font-weight:500;font-size:clamp(27px,4vw,38px);line-height:1.12;max-width:720px;}
+.lede{font-size:17.5px;color:var(--muted);max-width:660px;margin-top:16px;line-height:1.65;}
+.body-copy{max-width:660px;margin-top:16px;}
+.body-copy p{margin-top:13px;}
+
+/* Lens notes */
+.lens-note{display:none;margin-top:24px;padding:16px 20px;border-left:3px solid var(--gold);background:#FBF6EA;border-radius:0 8px 8px 0;font-size:14.5px;max-width:660px;}
+.lens-note strong{display:block;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:5px;}
+.lens-note.gov{border-color:var(--gold);background:#FBF6EA;}
+.lens-note.gov strong{color:#8A6C24;}
+.lens-note.staff{border-color:var(--navy-3);background:#EEF2F7;}
+.lens-note.staff strong{color:var(--navy-3);}
+.lens-note.parent{border-color:var(--green);background:#EDF4F0;}
+.lens-note.parent strong{color:var(--green);}
+body.lens-gov .lens-note.gov{display:block;}
+body.lens-staff .lens-note.staff{display:block;}
+body.lens-parent .lens-note.parent{display:block;}
+body.lens-all .lens-note{display:block;}
+
+/* Stat band */
+.stat-band{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0;margin-top:38px;background:var(--navy);border-radius:16px;overflow:hidden;}
+.stat{padding:30px 28px;border-left:1px solid rgba(237,234,226,.12);}
+.stat:first-child{border-left:none;}
+.stat .big{font-family:var(--serif);font-size:46px;font-weight:500;color:#EDEAE2;line-height:1;}
+.stat .big em{font-style:italic;color:#D9A9B2;}
+.stat p{color:rgba(237,234,226,.7);font-size:13.5px;margin-top:10px;line-height:1.55;}
+.stat .src{display:block;margin-top:10px;font-size:11px;color:rgba(237,234,226,.4);letter-spacing:.04em;}
+@media(max-width:700px){.stat{border-left:none;border-top:1px solid rgba(237,234,226,.12);}.stat:first-child{border-top:none;}}
+
+/* Skill chips */
+.skill-row{display:flex;flex-wrap:wrap;gap:9px;margin-top:26px;max-width:720px;}
+.skill-chip{border:1px solid var(--line);background:var(--card);padding:7px 15px;border-radius:100px;font-size:13px;font-weight:500;}
+.skill-chip.hot{border-color:var(--red);color:var(--red);font-weight:600;}
+
+/* Scorecard */
+.score{margin-top:40px;background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;}
+.score-head{display:grid;grid-template-columns:1.4fr 1fr 1fr;background:var(--navy);color:#EDEAE2;}
+.score-head div{padding:18px 22px;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;}
+.score-head .g{background:var(--red);}
+.score-row{display:grid;grid-template-columns:1.4fr 1fr 1fr;border-top:1px solid var(--line);}
+.score-row > div{padding:18px 22px;font-size:14px;}
+.score-row .q{font-weight:600;color:var(--ink);}
+.score-row .q small{display:block;font-weight:400;color:var(--muted);font-size:12.5px;margin-top:3px;line-height:1.5;}
+.score-row .a{color:var(--muted);line-height:1.55;}
+.score-row .a.win{background:#FBF3F4;color:var(--ink);}
+.mark{display:inline-flex;width:20px;height:20px;border-radius:50%;align-items:center;justify-content:center;margin-right:8px;vertical-align:-4px;flex-shrink:0;}
+.mark.yes{background:var(--red);}
+.mark.mid{background:#C9CFD8;}
+.mark svg{width:11px;height:11px;}
+@media(max-width:700px){
+  .score-head{grid-template-columns:1fr 1fr;}
+  .score-head .q-h{display:none;}
+  .score-row{grid-template-columns:1fr;}
+  .score-row .q{background:#FCFBF8;}
+  .score-row .a::before{content:attr(data-side);display:block;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--muted);margin-bottom:4px;}
+}
+
+/* Cost visual */
+.cost-viz{margin-top:36px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:32px;}
+.cost-viz h3{font-family:var(--serif);font-size:21px;font-weight:600;}
+.cost-viz .sub{font-size:13.5px;color:var(--muted);margin-top:4px;}
+.cost-bars{margin-top:26px;display:grid;gap:20px;}
+.cbar .lbl{display:flex;justify-content:space-between;font-size:13.5px;font-weight:600;margin-bottom:7px;}
+.cbar .lbl .amt{font-family:var(--serif);font-size:17px;}
+.cbar .track{height:26px;background:var(--paper);border:1px solid var(--line);border-radius:6px;overflow:hidden;}
+.cbar .fill{height:100%;border-radius:5px 0 0 5px;}
+.cbar.google .fill{width:2%;background:var(--red);min-width:8px;}
+.cbar.google .amt{color:var(--red);}
+.cbar.ms .fill{width:100%;background:var(--navy-3);}
+.cost-note{margin-top:18px;font-size:12.5px;color:var(--muted);line-height:1.6;border-top:1px solid var(--line);padding-top:16px;}
+
+/* Honesty box */
+.fair{margin-top:28px;max-width:760px;border:1px dashed var(--line);background:#FCFBF8;border-radius:12px;padding:24px 28px;}
+.fair h3{font-family:var(--serif);font-size:19px;font-weight:600;}
+.fair p{font-size:14.5px;color:var(--muted);margin-top:10px;line-height:1.65;}
+
+/* Recommendation strip */
+.rec-strip{margin-top:36px;border:2px solid var(--navy);border-radius:14px;background:var(--card);padding:26px 30px;display:flex;gap:24px;align-items:flex-start;flex-wrap:wrap;}
+.rec-strip .txt{flex:1;min-width:280px;}
+.rec-strip h3{font-family:var(--serif);font-size:22px;font-weight:600;}
+.rec-strip p{font-size:14.5px;color:var(--muted);margin-top:8px;line-height:1.6;}
+.rec-tag{font-size:11px;letter-spacing:.12em;text-transform:uppercase;background:rgba(200,16,46,.08);border:1px solid rgba(200,16,46,.5);color:var(--red);padding:6px 14px;border-radius:100px;font-weight:700;white-space:nowrap;}
+
+/* Timeline rail */
+.rail{margin-top:42px;position:relative;padding:0 6px;}
+.rail-line{position:absolute;left:6px;right:6px;top:9px;height:2px;background:var(--line);}
+.rail-stops{display:grid;grid-template-columns:1fr 1fr 1fr;position:relative;}
+.rail-stop{cursor:pointer;background:none;border:none;text-align:left;font-family:var(--sans);padding:0;}
+.rail-stop .dot{width:20px;height:20px;border-radius:50%;background:var(--paper);border:3px solid var(--line);display:block;transition:all .15s ease;}
+.rail-stop.active .dot{border-color:var(--red);background:var(--red);box-shadow:0 0 0 5px rgba(200,16,46,.14);}
+.rail-stop .rs-when{display:block;margin-top:12px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700;}
+.rail-stop .rs-name{display:block;font-family:var(--serif);font-size:18px;font-weight:600;margin-top:2px;color:var(--ink);}
+.rail-stop.active .rs-when{color:var(--red);}
+@media(max-width:600px){.rail-stop .rs-name{font-size:15px;}}
+
+.phase-panel{display:none;margin-top:32px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:30px 32px;}
+.phase-panel.active{display:block;animation:fadeUp .25s ease;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+.phase-panel .ph-principle{font-family:var(--serif);font-style:italic;color:var(--muted);font-size:16.5px;}
+.action{display:grid;grid-template-columns:100px 1fr;gap:16px;padding:14px 0;border-top:1px solid var(--line);}
+.action:first-of-type{margin-top:18px;}
+.action .when{font-size:12px;font-weight:700;color:var(--red);letter-spacing:.05em;text-transform:uppercase;padding-top:2px;}
+.action .what strong{display:block;font-size:15px;}
+.action .what p{font-size:13.5px;color:var(--muted);margin-top:2px;}
+@media(max-width:560px){.action{grid-template-columns:1fr;gap:2px;}}
+.done-when{margin-top:20px;padding:14px 18px;background:var(--paper);border:1px dashed var(--line);border-radius:10px;font-size:13.5px;color:var(--muted);}
+.done-when strong{color:var(--ink);}
+
+/* Accordion */
+.acc{margin-top:34px;border:1px solid var(--line);border-radius:14px;background:var(--card);overflow:hidden;}
+.acc-item + .acc-item{border-top:1px solid var(--line);}
+.acc-btn{width:100%;background:none;border:none;font-family:var(--sans);text-align:left;padding:20px 24px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;}
+.acc-btn:hover{background:#FCFBF8;}
+.acc-btn .t{font-family:var(--serif);font-size:18px;font-weight:600;}
+.acc-btn .n{font-size:11.5px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;font-weight:700;margin-right:12px;}
+.acc-btn .chev{flex-shrink:0;width:22px;height:22px;border:1px solid var(--line);border-radius:50%;position:relative;transition:transform .2s ease;}
+.acc-btn .chev::after{content:"";position:absolute;left:7px;top:5px;width:6px;height:6px;border-right:1.5px solid var(--muted);border-bottom:1.5px solid var(--muted);transform:rotate(45deg);}
+.acc-item.open .chev{transform:rotate(180deg);}
+.acc-panel{display:none;padding:0 24px 26px;font-size:14.5px;}
+.acc-item.open .acc-panel{display:block;}
+.acc-panel p{margin-top:10px;max-width:660px;}
+.acc-panel ul{margin:10px 0 0 20px;max-width:640px;}
+.acc-panel li{margin-top:7px;color:var(--ink);}
+.acc-panel .rule{font-weight:600;}
+
+/* Compliance strip */
+.comp-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-top:34px;}
+.comp{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px;border-top:3px solid var(--navy);}
+.comp .who{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700;}
+.comp .what{font-size:13.5px;font-weight:600;margin-top:5px;line-height:1.4;}
+.comp .date{display:block;margin-top:8px;font-size:11.5px;font-weight:700;color:var(--red);}
+
+/* You cards */
+.you-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;margin-top:34px;}
+.you-card{border-radius:12px;padding:26px;border:1px solid var(--line);background:var(--card);border-top:4px solid var(--gold);}
+.you-card.staff{border-top-color:var(--navy-3);}
+.you-card.parent{border-top-color:var(--green);}
+.you-card h3{font-family:var(--serif);font-size:20px;font-weight:600;}
+.you-card ul{margin:12px 0 0 17px;}
+.you-card li{font-size:14px;color:var(--muted);margin-top:8px;}
+
+/* Footer */
+.doc-foot{margin-top:84px;background:var(--navy);color:rgba(237,234,226,.75);padding:52px 24px;}
+.foot-inner{max-width:980px;margin:0 auto;}
+.foot-inner h2{color:#EDEAE2;font-size:25px;}
+.vlog{margin-top:24px;border-top:1px solid rgba(237,234,226,.15);}
+.vrow{display:grid;grid-template-columns:80px 120px 1fr;gap:16px;padding:12px 0;border-bottom:1px solid rgba(237,234,226,.12);font-size:13.5px;}
+.vrow .v{font-weight:700;color:#EDEAE2;}
+@media(max-width:600px){.vrow{grid-template-columns:70px 1fr;}.vrow .vd{display:none;}}
+.foot-meta{margin-top:30px;font-size:12.5px;line-height:1.8;}
+</style>
+</head>
+<body class="lens-all">
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="topline">The King's Foundation · Worcester</div>
+    <span class="status-ribbon"><span class="dot"></span>Draft v0.9 · Recommendation awaiting Foundation sign-off</span>
+    <h1>Digitally ready.<br><em>Future proof.</em></h1>
+    <p class="strap">One foundation. One journey. The right tool, at the right age, for the right reason.</p>
+    <div class="meta-row">
+      <div>Prepared for<span>Governors, staff and parents</span></div>
+      <div>Covers<span>King's Worcester · King's St Alban's · King's Hawford</span></div>
+      <div>Status<span>Living document · reviewed termly</span></div>
+    </div>
+  </div>
+</header>
+
+<div class="bar">
+  <div class="bar-inner">
+    <span class="bar-label">Reading as</span>
+    <button class="lens-btn active" data-lens="all">Everyone</button>
+    <button class="lens-btn" data-lens="gov">Governor</button>
+    <button class="lens-btn" data-lens="staff">Staff</button>
+    <button class="lens-btn" data-lens="parent">Parent</button>
+    <nav class="bar-nav" aria-label="Sections">
+      <a href="#why">Why now</a>
+      <a href="#choice">The choice</a>
+      <a href="#plan">The plan</a>
+      <a href="#rules">The rules</a>
+      <a href="#you">For you</a>
+    </nav>
+  </div>
+</div>
+
+<main>
+
+<!-- ============ 1 · WHY NOW ============ -->
+<section id="why">
+  <p class="eyebrow">Part one · Why now</p>
+  <h2>Our pupils will work alongside AI for their whole careers</h2>
+  <p class="lede">The OECD has spent a decade studying which skills hold their value as AI spreads. Judgement, communication and digital fluency rise. Routine knowledge falls. Its Learning Compass names the three that matter most: creating new value, reconciling dilemmas, and taking responsibility.</p>
+  <div class="body-copy">
+    <p>The same research carries a warning. Pupils who hand their thinking to AI produce better work in the moment and learn less from it. The gains vanish in the exam hall. So the task is to teach AI use, deliberately, from the right age, on tools the school governs. That's a teaching challenge first and a technology decision second, and this strategy treats it that way.</p>
+  </div>
+
+  <div class="stat-band">
+    <div class="stat">
+      <span class="big">10 <em>yrs</em></span>
+      <p>A pupil joining King's Hawford this September sits GCSEs in the mid-2030s. Every decision here is tested against what that pupil will need.</p>
+      <span class="src">OECD Learning Compass 2030</span>
+    </div>
+    <div class="stat">
+      <span class="big">37%</span>
+      <p>of secondary teachers already used AI in their work by 2024. AI in schools is a fact to govern, not a choice to postpone.</p>
+      <span class="src">OECD TALIS survey</span>
+    </div>
+    <div class="stat">
+      <span class="big"><em>&darr;</em> skill</span>
+      <p>Unguided AI use improves the work and weakens the pupil. Taught use does the opposite. Teaching quality decides which we get.</p>
+      <span class="src">OECD Digital Education Outlook 2026</span>
+    </div>
+  </div>
+
+  <div class="skill-row" aria-label="Skills rising in value">
+    <span class="skill-chip hot">Critical thinking</span>
+    <span class="skill-chip hot">Creating new value</span>
+    <span class="skill-chip hot">Taking responsibility</span>
+    <span class="skill-chip">Communication</span>
+    <span class="skill-chip">Collaboration</span>
+    <span class="skill-chip">Digital fluency</span>
+    <span class="skill-chip">Self-regulation</span>
+  </div>
+
+  <div class="lens-note gov"><strong>For governors</strong>AI literacy is becoming a core academic outcome. The Foundation that teaches it well earns a durable advantage in a market where most schools haven't moved.</div>
+  <div class="lens-note staff"><strong>For staff</strong>Nothing here asks you to become a technologist. The skills the OECD names are the ones you already teach. AI raises their value; it doesn't replace your subject.</div>
+  <div class="lens-note parent"><strong>For parents</strong>We won't hand your child a chatbot and hope. Every AI tool pupils touch is taught, supervised and age-appropriate.</div>
+</section>
+
+<!-- ============ 2 · THE CHOICE ============ -->
+<section id="choice">
+  <p class="eyebrow">Part two · The choice</p>
+  <h2>Google or Microsoft: the honest comparison</h2>
+  <p class="lede">Firefly retires by Easter 2027, so the Foundation must choose its platform this year. Two credible options exist: stay Microsoft and build on Teams and Copilot, or move to Google Workspace with Classroom and Gemini. The principle set by our own operations team decides it: teaching needs drive IT provision.</p>
+
+  <div class="score" role="table" aria-label="Google versus Microsoft comparison">
+    <div class="score-head">
+      <div class="q-h">What matters</div>
+      <div class="g">Google · Workspace + Classroom + Gemini</div>
+      <div>Microsoft · 365 + Teams + Copilot</div>
+    </div>
+    <div class="score-row">
+      <div class="q">AI for every age we teach<small>The Foundation runs from age 2 to 18. Prep pupils matter as much as sixth formers.</small></div>
+      <div class="a win" data-side="Google"><span class="mark yes"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6.5L5 9.5L10 3" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></span>Gemini for Education covers the full age range, with stricter protections for younger pupils and full admin control over who gets what.</div>
+      <div class="a" data-side="Microsoft"><span class="mark mid"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6H10" stroke="#5C6B7E" stroke-width="2" stroke-linecap="round"/></svg></span>Copilot is 13+ only. Under-13s aren't eligible at all, which rules out AI provision across both prep schools.</div>
+    </div>
+    <div class="score-row">
+      <div class="q">Cost of governed AI<small>The full assistant, inside the everyday tools, for staff and pupils.</small></div>
+      <div class="a win" data-side="Google"><span class="mark yes"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6.5L5 9.5L10 3" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></span>Gemini and NotebookLM are included in every Workspace for Education edition at no extra cost.</div>
+      <div class="a" data-side="Microsoft"><span class="mark mid"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6H10" stroke="#5C6B7E" stroke-width="2" stroke-linecap="round"/></svg></span>Full Microsoft 365 Copilot is a paid add-on at $18 per user per month. The free tier (Copilot Chat) is a web chat, not the in-app assistant.</div>
+    </div>
+    <div class="score-row">
+      <div class="q">The VLE itself<small>Where work is set, collected, marked and returned every day.</small></div>
+      <div class="a win" data-side="Google"><span class="mark yes"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6.5L5 9.5L10 3" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></span>Classroom is built for exactly this and nothing else. Simple enough for Year 3, capable enough for A-level coursework.</div>
+      <div class="a" data-side="Microsoft"><span class="mark mid"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6H10" stroke="#5C6B7E" stroke-width="2" stroke-linecap="round"/></svg></span>Teams is a meetings and chat product with Assignments added on. It works, but pupils navigate channels, chats and tabs to find their homework.</div>
+    </div>
+    <div class="score-row">
+      <div class="q">What pupils already know<small>Most local primaries, including Worcester state schools, run Google Classroom.</small></div>
+      <div class="a win" data-side="Google"><span class="mark yes"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6.5L5 9.5L10 3" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></span>Pupils joining at 11 and 16 largely arrive fluent. Induction time goes to learning, not logins.</div>
+      <div class="a" data-side="Microsoft"><span class="mark mid"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6H10" stroke="#5C6B7E" stroke-width="2" stroke-linecap="round"/></svg></span>Teams is standard in workplaces, less so in the primaries our pupils join from.</div>
+    </div>
+    <div class="score-row">
+      <div class="q">Data protection for pupils<small>UK GDPR, no training on our data, no human review of pupil conversations.</small></div>
+      <div class="a win" data-side="Google"><span class="mark yes"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6.5L5 9.5L10 3" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></span>Meets the standard at every tier, free. Pupil conversations aren't reviewed or used for training.</div>
+      <div class="a" data-side="Microsoft"><span class="mark yes" style="background:var(--navy-3)"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6.5L5 9.5L10 3" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></span>Also meets the standard within the tenant. On data protection this is a draw; the difference is age eligibility and price.</div>
+    </div>
+    <div class="score-row">
+      <div class="q">Recurring cost<small>Licences released by retiring Firefly, against our estimates.</small></div>
+      <div class="a win" data-side="Google"><span class="mark yes"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6.5L5 9.5L10 3" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></span>Estimated £30,000–£38,000 a year released against roughly £20,000 one-off migration. Our own figures, to be re-tested before commitment.</div>
+      <div class="a" data-side="Microsoft"><span class="mark mid"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6H10" stroke="#5C6B7E" stroke-width="2" stroke-linecap="round"/></svg></span>No migration cost, but the Firefly replacement question remains and pupil AI needs the paid add-on for 13+, with nothing below.</div>
+    </div>
+  </div>
+
+  <div class="cost-viz">
+    <h3>The AI price gap, per person, per month</h3>
+    <p class="sub">The full assistant inside the everyday apps: Gemini in Docs, Slides and Classroom, against Microsoft 365 Copilot in Word, PowerPoint and Teams.</p>
+    <div class="cost-bars">
+      <div class="cbar google">
+        <div class="lbl"><span>Gemini for Education</span><span class="amt">£0</span></div>
+        <div class="track"><div class="fill"></div></div>
+      </div>
+      <div class="cbar ms">
+        <div class="lbl"><span>Microsoft 365 Copilot (academic, 13+ only)</span><span class="amt">≈ £14 / user / month</span></div>
+        <div class="track"><div class="fill"></div></div>
+      </div>
+    </div>
+    <p class="cost-note">Microsoft's academic price is $18 per user per month, roughly £14. Across a Foundation of our size that's six figures a year to match what Gemini includes for nothing, and it still leaves every pupil under 13 without provision. Microsoft's free Copilot Chat (13+, admin-enabled) is a browser chat without the in-app integration.</p>
+  </div>
+
+  <div class="fair">
+    <h3>Where Microsoft is genuinely ahead</h3>
+    <p>Honesty strengthens the case. We're a Microsoft school today: staff know Outlook and Word, some departments run OneNote well, and staying put would cost nothing in transition effort. Excel remains the stronger spreadsheet for advanced work, and Teams is what most pupils will meet in employment. None of that is dismissed. The judgement is that a one-off, well-supported migration costs less than paying every year, and every pupil, for an AI provision that excludes half the Foundation by age.</p>
+  </div>
+
+  <div class="rec-strip">
+    <div class="txt">
+      <h3>The recommendation</h3>
+      <p>Google Workspace for Education Plus across all three schools, Google Classroom as the single VLE replacing Firefly, and Gemini for Education as the Foundation's governed AI. Devices are deliberately excluded and follow as a separate costed workstream. Moving the Senior School moves the direction for the preps too, so this is asked for as one conscious Foundation-level decision.</p>
+    </div>
+    <span class="rec-tag">Awaiting sign-off</span>
+  </div>
+
+  <div class="lens-note gov"><strong>For governors</strong>The ask is direction with review points, not a blank cheque: sanction the platform this autumn, receive full costings first, and hold a termly checkpoint against the phase tests in part three.</div>
+  <div class="lens-note staff"><strong>For staff</strong>Your files, email and calendars migrate for you, with side-by-side running. Training happens in directed time with champions in every department. Nothing you rely on is switched off until its replacement works.</div>
+  <div class="lens-note parent"><strong>For parents</strong>The practical result is one login for your child's work, homework in one predictable place, and AI that the school switches on, age-gates and monitors, rather than whatever the app store offers.</div>
+</section>
+
+<!-- ============ 3 · THE PLAN ============ -->
+<section id="plan">
+  <p class="eyebrow">Part three · The plan</p>
+  <h2>Fast where it's safe, careful where it counts</h2>
+  <p class="lede">Three phases, each with a plain test for when it's done. Staff move before pupils. Policy moves before tools. Nothing retires before its replacement works. Select a phase on the line below.</p>
+
+  <div class="rail">
+    <div class="rail-line"></div>
+    <div class="rail-stops">
+      <button class="rail-stop active" data-phase="p1"><span class="dot"></span><span class="rs-when">Sept – Dec 2026</span><span class="rs-name">Steady the ground</span></button>
+      <button class="rail-stop" data-phase="p2"><span class="dot"></span><span class="rs-when">Jan – Aug 2027</span><span class="rs-name">Build the spine</span></button>
+      <button class="rail-stop" data-phase="p3"><span class="dot"></span><span class="rs-when">2027 – 28</span><span class="rs-name">Lead the region</span></button>
+    </div>
+  </div>
+
+  <div class="phase-panel active" id="p1">
+    <p class="ph-principle">Credibility before disruption. Everything this term is low-cost, reversible and visibly useful to staff.</p>
+    <div class="action"><div class="when">Sept</div><div class="what"><strong>Adopt the responsible-AI policy</strong><p>Codifies JCQ coursework rules for every department and meets the KCSIE duties that take effect this term. Closes a live compliance gap at no cost.</p></div></div>
+    <div class="action"><div class="when">Sept</div><div class="what"><strong>Appoint an AI and Digital Learning Lead from existing staff</strong><p>A responsibility allowance, not a new hire. One named owner for AI literacy, training and the accreditation work in phase three.</p></div></div>
+    <div class="action"><div class="when">Sept–Oct</div><div class="what"><strong>Switch on Gemini for staff only</strong><p>Teachers get governed AI for planning and workload first, trained on the DfE's own modules. Staff learn the tool before pupils do.</p></div></div>
+    <div class="action"><div class="when">Oct</div><div class="what"><strong>Fix the visible gaps</strong><p>A working replacement for report proofreading before the winter round, and one home for academic data. Small wins that show the strategy solves real problems.</p></div></div>
+    <div class="action"><div class="when">Nov–Dec</div><div class="what"><strong>Foundation decides the platform</strong><p>Governors take the recommendation in part two with full costings. If sanctioned, migration planning starts in January with champions in all three schools.</p></div></div>
+    <div class="done-when"><strong>Done when</strong> every member of staff knows the coursework rules, staff Gemini use is routine in half of departments, and the board has decided the platform.</div>
+  </div>
+
+  <div class="phase-panel" id="p2">
+    <p class="ph-principle">One place for work across the Foundation, delivered around the school year, exam season protected.</p>
+    <div class="action"><div class="when">Jan–Feb</div><div class="what"><strong>Staff migrate to Workspace</strong><p>Email, files and calendars move with side-by-side running. Champions first, then whole-staff sessions in directed time.</p></div></div>
+    <div class="action"><div class="when">Jan–Mar</div><div class="what"><strong>Classroom pilots in volunteer departments</strong><p>Real classes, honest feedback. Pilots set the Foundation's standard ways of working so rollout copies what already works here.</p></div></div>
+    <div class="action"><div class="when">Easter</div><div class="what"><strong>Firefly retires on schedule</strong><p>Content worth keeping is exported and rehomed before switch-off.</p></div></div>
+    <div class="action"><div class="when">Apr–Jun</div><div class="what"><strong>Pupils move, year group by year group</strong><p>Exam years keep familiar workflows until papers are sat. Everyone else moves in planned order with in-lesson induction.</p></div></div>
+    <div class="action"><div class="when">Summer</div><div class="what"><strong>Parent AI evening, sixth-form AI Society, accreditation entry</strong><p>Parents see the actual tools. Pupils get a public platform. The Foundation joins the AI Quality Mark ladder at entry level.</p></div></div>
+    <div class="done-when"><strong>Done when</strong> Classroom is the single place work is set and collected in all three schools, Firefly is off, and no department runs two systems.</div>
+  </div>
+
+  <div class="phase-panel" id="p3">
+    <p class="ph-principle">Turn embedded practice into recognised leadership, and share the cost through partnership.</p>
+    <div class="action"><div class="when">Autumn 27</div><div class="what"><strong>Taught pupil AI use expands by age</strong><p>Sixth form first, then supervised use lower down the Senior School. Prep pupils learn about AI before they use it.</p></div></div>
+    <div class="action"><div class="when">Autumn 27</div><div class="what"><strong>AI literacy enters the curriculum</strong><p>A Key Stage 3 unit on how AI works, bias and academic integrity, with AI-use expectations published by every department.</p></div></div>
+    <div class="action"><div class="when">2027–28</div><div class="what"><strong>Apply for Google Reference School status</strong><p>No school in the region holds it. With Workspace embedded and staff certified, the Foundation is the natural first claimant.</p></div></div>
+    <div class="action"><div class="when">2027–28</div><div class="what"><strong>Lead a shared AI framework across the Three Choirs Schools Group</strong><p>One responsible-AI framework across 2,600 pupils in three cathedral cities, with shared training and procurement.</p></div></div>
+    <div class="action"><div class="when">2027–28</div><div class="what"><strong>Digital exam readiness</strong><p>Typing fluency, on-screen mocks and invigilation protocols, ahead of the exam boards' slow but certain move on-screen.</p></div></div>
+    <div class="done-when"><strong>Done when</strong> an inspector, a prospective parent or a Year 6 pupil could each be shown, not told, how the Foundation teaches young people to think with and about AI.</div>
+  </div>
+
+  <div class="lens-note gov"><strong>For governors</strong>Spending is back-loaded: phase one is close to cost-neutral, and material commitments follow the platform decision. Each phase ends at a review point reported termly to the Digital Strategy Group.</div>
+  <div class="lens-note staff"><strong>For staff</strong>The sequencing protects you: staff tools land before pupil tools, so you're never learning in front of a class. Raise a problem early and it's the project's problem, not yours.</div>
+  <div class="lens-note parent"><strong>For parents</strong>You'll be invited in before pupils' AI use expands, not informed afterwards. The parent AI evening in summer 2027 shows the actual tools and safeguards.</div>
+</section>
+
+<!-- ============ 4 · THE RULES ============ -->
+<section id="rules">
+  <p class="eyebrow">Part four · The rules</p>
+  <h2>Responsible AI, in plain English</h2>
+  <p class="lede">The working draft of the Foundation's responsible-AI policy. Written to be read, not filed. Each section expands.</p>
+
+  <div class="acc">
+    <div class="acc-item open">
+      <button class="acc-btn" aria-expanded="true"><span><span class="n">§1</span><span class="t">Principles</span></span><span class="chev"></span></button>
+      <div class="acc-panel">
+        <ul>
+          <li><span class="rule">Safety first.</span> The DfE's guidance is clear that safety leads every decision about generative AI in schools. Where safety and convenience conflict, safety wins.</li>
+          <li><span class="rule">Human in the loop.</span> AI never makes a judgement about a pupil on its own. A teacher checks, decides and remains accountable. AI is never the sole marker of pupil work.</li>
+          <li><span class="rule">Taught, not found.</span> Pupils meet AI through supervised, age-appropriate teaching on school-governed tools, not through the app store.</li>
+          <li><span class="rule">Thinking stays with the pupil.</span> AI use that replaces a pupil's own reasoning is misuse, whatever tool it happens on.</li>
+          <li><span class="rule">Transparent with families.</span> Parents can always find out which tools their child uses, what data those tools hold and who to ask.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="acc-item">
+      <button class="acc-btn" aria-expanded="false"><span><span class="n">§2</span><span class="t">Approved tools and data</span></span><span class="chev"></span></button>
+      <div class="acc-panel">
+        <ul>
+          <li>Only tools on the Foundation's approved list are used for school work. Approval needs a risk assessment covering safeguarding, data protection, age terms and educational value.</li>
+          <li>Gemini for Education, once enabled, is the approved AI platform: education terms, no human review of conversations, no training on our data, admin-controlled.</li>
+          <li>No personal data about any pupil or member of staff goes into an unapproved AI tool. No free consumer chatbot meets our data standard.</li>
+          <li>The list is public to staff, reviewed termly, and anything can be proposed for it.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="acc-item">
+      <button class="acc-btn" aria-expanded="false"><span><span class="n">§3</span><span class="t">Staff use</span></span><span class="chev"></span></button>
+      <div class="acc-panel">
+        <ul>
+          <li>Staff are encouraged to use approved AI to cut workload: adapting resources, drafting non-sensitive materials, generating practice questions.</li>
+          <li>Every AI output used with pupils is checked by the teacher for accuracy, bias, reading age and curriculum fit first.</li>
+          <li>AI may assist report drafting only inside the approved environment and never as the final voice. The teacher's knowledge of the child is the report.</li>
+          <li>Training follows the DfE's published AI modules, in directed time, with no assumption of prior confidence.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="acc-item">
+      <button class="acc-btn" aria-expanded="false"><span><span class="n">§4</span><span class="t">Pupil use, by age</span></span><span class="chev"></span></button>
+      <div class="acc-panel">
+        <ul>
+          <li><span class="rule">King's Hawford and King's St Alban's.</span> Pupils learn about AI before they use it. Direct use of generative tools is by exception, teacher-led, on the screen at the front.</li>
+          <li><span class="rule">Senior School, Years 7–11.</span> Structured, supervised use in taught contexts. Prompting, verification and referencing are taught as explicit skills.</li>
+          <li><span class="rule">Sixth Form.</span> The widest access and the highest expectations: approved AI as a study tool under §5, and leadership of the Foundation's AI Society.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="acc-item">
+      <button class="acc-btn" aria-expanded="false"><span><span class="n">§5</span><span class="t">Assessment and coursework (JCQ)</span></span><span class="chev"></span></button>
+      <div class="acc-panel">
+        <p>For any work contributing to a qualification, JCQ's AI Use in Assessments guidance (revision 2, April 2025) applies without exception. Every department publishes how it applies in their subject.</p>
+        <ul>
+          <li>Work submitted must be the pupil's own. AI content passed off as the pupil's own is malpractice.</li>
+          <li>Where AI is permitted in research stages it must be referenced: tool named, date recorded, and a non-editable copy of prompt and output (a screenshot) kept and submitted with the work.</li>
+          <li>Teachers authenticate work using their knowledge of the pupil. Where a teacher can't sign the authentication statement, the malpractice procedure applies.</li>
+          <li>The exams officer and heads of department review these procedures each September against current JCQ publications.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="acc-item">
+      <button class="acc-btn" aria-expanded="false"><span><span class="n">§6</span><span class="t">Safeguarding (KCSIE)</span></span><span class="chev"></span></button>
+      <div class="acc-panel">
+        <p>Keeping Children Safe in Education 2026, in force from this September, treats AI-enabled harm as mainstream safeguarding. Our policy follows it.</p>
+        <ul>
+          <li>AI-generated intimate images and deepfakes are child-on-child abuse under KCSIE 2026, handled through safeguarding procedures, never as a technology incident.</li>
+          <li>AI chat tools that simulate people or relationships are a contact risk. Companion-style chatbots are not approved for pupils at any age.</li>
+          <li>Filtering and monitoring cover AI tools, with the annual effectiveness review KCSIE now requires reported to governors.</li>
+          <li>All staff read KCSIE Part 1 in full, and training includes recognising AI-related harm: coercion, impersonation, image-based abuse.</li>
+          <li>Concerns go to the Designated Safeguarding Lead by the normal route. AI changes the medium, not the duty.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="acc-item">
+      <button class="acc-btn" aria-expanded="false"><span><span class="n">§7</span><span class="t">Review</span></span><span class="chev"></span></button>
+      <div class="acc-panel">
+        <ul>
+          <li>Reviewed each September against the current DfE policy paper, JCQ publications and KCSIE, and each January by the Foundation Digital Strategy Group.</li>
+          <li>Owned by the Deputy Head (Academic and Innovation); operated by the AI and Digital Learning Lead; safeguarding sections owned jointly with the DSL.</li>
+          <li>Version history is published at the foot of this document. Staff, pupils and parents can propose changes at any time.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="comp-strip" aria-label="Guidance this strategy satisfies">
+    <div class="comp"><span class="who">DfE</span><span class="what">Generative AI in education</span><span class="date">2025 · modules 2026</span></div>
+    <div class="comp"><span class="who">JCQ</span><span class="what">AI Use in Assessments, rev. 2</span><span class="date">30 April 2025</span></div>
+    <div class="comp"><span class="who">DfE statutory</span><span class="what">KCSIE 2026</span><span class="date">In force 1 Sept 2026</span></div>
+    <div class="comp"><span class="who">ISI</span><span class="what">Inspection framework</span><span class="date">Updated Sept 2025</span></div>
+    <div class="comp"><span class="who">HMC</span><span class="what">AI &amp; EdTech working group</span><span class="date">Standing</span></div>
+    <div class="comp"><span class="who">OECD</span><span class="what">Learning Compass · Digital Education Outlook</span><span class="date">2030 · 2026</span></div>
+  </div>
+
+  <div class="lens-note gov"><strong>For governors</strong>Adopting §5 and §6 in September is the compliance-critical step: KCSIE 2026 takes effect on 1 September and ISI reports state plainly whether safeguarding meets the standard. The rest can iterate; these two can't wait.</div>
+  <div class="lens-note staff"><strong>For staff</strong>If you remember one section, make it §5. Follow the referencing and authentication steps and you're covered. When in doubt, ask the exams officer before signing anything.</div>
+  <div class="lens-note parent"><strong>For parents</strong>§4 is yours: what your child can and can't use at every age. If anything at home worries you, from homework shortcuts to AI "friends", tell us early. No judgement attached.</div>
+</section>
+
+<!-- ============ 5 · FOR YOU ============ -->
+<section id="you">
+  <p class="eyebrow">Part five · In practice</p>
+  <h2>What changes, for whom, and when</h2>
+  <div class="you-grid">
+    <div class="you-card">
+      <h3>Governors</h3>
+      <ul>
+        <li>September: adopt the AI policy; receive the KCSIE 2026 assurance report.</li>
+        <li>Autumn term: decide the platform recommendation, with full costings.</li>
+        <li>Termly: Digital Strategy Group report against the phase tests.</li>
+        <li>Annually: filtering and monitoring review, and policy re-approval.</li>
+      </ul>
+    </div>
+    <div class="you-card staff">
+      <h3>Staff</h3>
+      <ul>
+        <li>September: read the AI policy; departments confirm JCQ coursework procedures.</li>
+        <li>This term: governed Gemini access for planning, with DfE-based training.</li>
+        <li>From January: migration with champions, side-by-side running, directed-time training.</li>
+        <li>Always: raise friction early. The project owns problems, not individuals.</li>
+      </ul>
+    </div>
+    <div class="you-card parent">
+      <h3>Parents</h3>
+      <ul>
+        <li>September: MySchoolPortal and SOCS go live for communication and co-curricular life.</li>
+        <li>Any time: the approved-tools list and this policy are open to you.</li>
+        <li>Summer 2027: parent AI evening, before pupils' AI use expands.</li>
+        <li>Ongoing: one login for your child's work once Classroom is embedded.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="doc-foot">
+  <div class="foot-inner">
+    <h2 style="font-family:var(--serif);font-weight:500;">A living document</h2>
+    <p style="margin-top:12px;max-width:620px;">This strategy is published as a website deliberately. It carries version numbers, named owners and review dates, and it changes in the open as guidance and our own experience move. If you're reading a printout, the current version lives online.</p>
+    <div class="vlog">
+      <div class="vrow"><span class="v">v0.9</span><span class="vd">July 2026</span><span>Full working draft. Platform recommendation awaiting sign-off; devices excluded pending a separate costed workstream.</span></div>
+      <div class="vrow"><span class="v">v1.0</span><span class="vd">Sept 2026</span><span>Planned: policy §5–§6 in force; Strategy Day feedback incorporated.</span></div>
+      <div class="vrow"><span class="v">v1.1</span><span class="vd">Jan 2027</span><span>Planned: post-decision update with confirmed migration calendar and pilot findings.</span></div>
+    </div>
+    <div class="foot-meta">
+      Owner: Deputy Head (Academic and Innovation), the King's Foundation · Review: termly, Foundation Digital Strategy Group<br>
+      Companion documents (internal): Now vs Future comparison · Microsoft-to-Google migration map · Competitor intelligence report<br>
+      Sources: DfE <em>Generative AI in education</em> (2025, modules 2026) · JCQ <em>AI Use in Assessments</em> rev. 2 (2025) · KCSIE 2026 · ISI Inspection Framework (2025) · Microsoft 365 Copilot academic licensing (2025–26) · Google Workspace for Education / Gemini terms (2026) · OECD Learning Compass 2030 · OECD Digital Education Outlook 2026
+    </div>
+  </div>
+</footer>
+
+<script>
+const lensBtns = document.querySelectorAll('.lens-btn');
+lensBtns.forEach(btn => btn.addEventListener('click', () => {
+  lensBtns.forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.body.className = 'lens-' + btn.dataset.lens;
+}));
+
+const stops = document.querySelectorAll('.rail-stop');
+stops.forEach(stop => stop.addEventListener('click', () => {
+  stops.forEach(s => s.classList.remove('active'));
+  stop.classList.add('active');
+  document.querySelectorAll('.phase-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById(stop.dataset.phase).classList.add('active');
+}));
+
+document.querySelectorAll('.acc-btn').forEach(btn => btn.addEventListener('click', () => {
+  const item = btn.parentElement;
+  const isOpen = item.classList.contains('open');
+  item.classList.toggle('open', !isOpen);
+  btn.setAttribute('aria-expanded', String(!isOpen));
+}));
+</script>
+</body>
+</html>
